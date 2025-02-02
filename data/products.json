@@ -1,43 +1,23 @@
 [
-    {
-      "id": 1,
-      "name": "Producto uno",
-      "image": "https://fastly.picsum.photos/id/844/300/200.jpg?hmac=nScDnrvjcq1VjYNAh6OKIR_tQdDSITIWW578WbADLgc",
-      "description": "Descripcion del producto 1",
-      "priceList": 100,
-      "pricePublic": 200
-    },
-    {
-      "id": 2,
-      "name": "Producto 2",
-      "image": "https://fastly.picsum.photos/id/844/300/200.jpg?hmac=nScDnrvjcq1VjYNAh6OKIR_tQdDSITIWW578WbADLgc",
-      "description": "Descripcion del producto 2",
-      "priceList": 150,
-      "pricePublic": 250
-    },
-    {
-      "id": 3,
-      "name": "Producto 3",
-      "image": "https://fastly.picsum.photos/id/844/300/200.jpg?hmac=nScDnrvjcq1VjYNAh6OKIR_tQdDSITIWW578WbADLgc",
-      "description": "Descripcion del producto 3",
-      "priceList": 120,
-      "pricePublic": 220
-    },
-    {
-      "id": 4,
-      "name": "Producto 4",
-      "image": "https://fastly.picsum.photos/id/844/300/200.jpg?hmac=nScDnrvjcq1VjYNAh6OKIR_tQdDSITIWW578WbADLgc",
-      "description": "Descripcion del producto 4",
-      "priceList": 130,
-      "pricePublic": 230
-    },
-    {
-      "id": 5,
-      "name": "Producto 5",
-      "image": "https://fastly.picsum.photos/id/844/300/200.jpg?hmac=nScDnrvjcq1VjYNAh6OKIR_tQdDSITIWW578WbADLgc",
-      "description": "Descripcion del producto 5",
-      "priceList": 140,
-      "pricePublic": 240
-    }
-  ]
-  
+  {
+    "name": "producto 1",
+    "image": "https://res.cloudinary.com/dxxte9caz/image/upload/v1738467594/producto%201.jpg",
+    "description": "Descripcion del producto 1",
+    "priceList": 100,
+    "pricePublic": 200
+  },
+  {
+    "name": "",
+    "image": "https://res.cloudinary.com/dxxte9caz/image/upload/v1738470830/ewewqilrmw2z3nwizwe4.jpg",
+    "description": "",
+    "priceList": "",
+    "pricePublic": ""
+  },
+  {
+    "name": "a",
+    "image": "https://res.cloudinary.com/dxxte9caz/image/upload/v1738471117/a.jpg",
+    "description": "a",
+    "priceList": "2",
+    "pricePublic": "2"
+  }
+]
