@@ -1,8 +1,9 @@
 import multer from 'multer';
 import { promises as fs } from 'fs';
-import path from 'path';
+import path, { resolve } from 'path';
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
+import { rejects } from 'assert';
 
 export async function POST(request) {
    cloudinary.config({
@@ -12,7 +13,18 @@ export async function POST(request) {
     });
     
     try {
-        let data = await request.json();
+        const dataFormData = await request.formData();
+        let data = {
+          name: dataFormData.get("name"),
+          image: dataFormData.get("image"),
+          description: dataFormData.get("description"),
+          priceList: dataFormData.get("priceList"),
+          pricePublic: dataFormData.get("pricePublic")
+        }
+        const bytesImage = await data.image.arrayBuffer()
+        const buffer = Buffer.from(bytesImage)
+        
+        // console.log(buffer)
 
       if(data.name === "" || data.description === "" || data.priceList === "" || data.pricePublic ===""){
          return NextResponse.json({ message: "Ningun campo de texto puede estar vacio" }, { status: 400 });
@@ -36,8 +48,15 @@ export async function POST(request) {
 
         try {
          // Upload an image
-         const imagePath = path.join(process.cwd(), 'public', 'imagen.jpg');
-         const uploadResult  = await cloudinary.uploader.upload(imagePath, {public_id: data.name,})
+        //  const imagePath = path.join(process.cwd(), 'public', 'imagen.jpg');
+        //  const uploadResult  = await cloudinary.uploader.upload(buffer, {public_id: data.name,})
+          const uploadResult = await new Promise((resolve, reject)=>{
+            cloudinary.uploader.upload_stream({}, (err, result)=>{
+              if(err) reject(err)
+              resolve(result)
+            })
+            .end(buffer)
+          })
          if(uploadResult){
             data = {...data, image: uploadResult.secure_url}
          }

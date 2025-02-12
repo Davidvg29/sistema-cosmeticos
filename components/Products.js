@@ -49,18 +49,36 @@ export default function Products() {
 
     useEffect(() => {getProducts()}, []);
 
-    const handleData = (e)=>{
-      setData({...data, [e.target.name]: e.target.value})
-    }
+    const handleData = (e) => {
+      if (e.target.name === "image") {
+        setData((prevData) => ({ ...prevData, image: e.target.files[0] }));
+      } else {
+        setData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
+      }
+    };
+    
     const sendData = async(e)=>{
       e.preventDefault()
+      const formData = new FormData()
+      // Agregar cada campo del estado `data` al FormData
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+      formData.append("priceList", data.priceList);
+      formData.append("pricePublic", data.pricePublic);
+      
+      // Agregar la imagen (debe ser un archivo, no una URL)
+      if (data.image) {
+        formData.append("image", data.image);
+      }
+
       try {
         const response = await fetch("/api/createProduct", {
           method: "POST",
-          headers: {"Content-type": "application/json",},
-          body: JSON.stringify(data)
+          // headers: {"Content-type": "multipart/form-data",},
+          body: formData
         })
         const result = await response.json()
+        console.log(result)
         if(result){
           setMessage(result.message)
         }else {
@@ -72,7 +90,7 @@ export default function Products() {
         setMessage(error.message)
       }
     }
-    
+    // console.log(data)
   return (
     <>
       <div className=' w-full flex flex-wrap justify-center sm:justify-end items-center'>
@@ -88,7 +106,7 @@ export default function Products() {
                   <Label>Nombre del producto</Label>
                   <Input className="mb-5" placeholder="Nombre producto" name="name" value={data.name} onChange={handleData}/>
                   <Label>Cargar imagen</Label>
-                  <Input className="mb-5" id="picture" type="file" name="image" value={data.image} onChange={handleData}/>
+                  <Input className="mb-5" id="picture" type="file" name="image" onChange={handleData}/>
                   <Label>Descripcion del producto</Label>
                   <Input className="mb-5" placeholder="Descripcion producto" name="description" value={data.description} onChange={handleData}/>
                   <label className='flex justify-between'>
@@ -118,11 +136,11 @@ export default function Products() {
       </div>
       <div className='flex flex-wrap justify-center'>
       {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
-        filteredProducts.map((product) => (
+        filteredProducts.reverse().map((product) => (
             <Cards key={product.name} product={product} />
         ))
         ) : (
-        <p>No se encontro nigun producto</p>
+        <p>No se encontro ningun producto</p>
         )}
       </div>
     </>
