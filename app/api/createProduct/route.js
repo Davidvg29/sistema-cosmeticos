@@ -51,13 +51,16 @@ export async function POST(request) {
         //  const imagePath = path.join(process.cwd(), 'public', 'imagen.jpg');
         //  const uploadResult  = await cloudinary.uploader.upload(buffer, {public_id: data.name,})
           const uploadResult = await new Promise((resolve, reject)=>{
-            cloudinary.uploader.upload_stream({}, (err, result)=>{
+            cloudinary.uploader.upload_stream({
+              folder: "sistema cosmeticos"
+            }, (err, result)=>{
               if(err) reject(err)
               resolve(result)
             })
             .end(buffer)
           })
          if(uploadResult){
+          // console.log(uploadResult)
             data = {...data, image: uploadResult.secure_url}
          }
         } catch (error) {
