@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "name": "Humor libertad",
+    "image": "https://res.cloudinary.com/djkld6wmk/image/upload/v1739387182/sistema%20cosmeticos/bnqtnclimgwtts0licdr.jpg",
+    "description": "permufe humor libertad",
+    "priceList": "25000",
+    "pricePublic": "45000"
+  }
+]

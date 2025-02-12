@@ -39,6 +39,7 @@ export function Login({className, ...props}) {
       .then(data => {
         console.log(data);
         if(data.success){
+          sessionStorage.setItem("token", data.token)
           router.push('/dashboard')
         }
         setMessage(data.message)
