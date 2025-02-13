@@ -1,6 +1,6 @@
 'use client'
 
-import { Search, CirclePlus } from 'lucide-react';
+import { Search, CirclePlus, RefreshCw  } from 'lucide-react';
 import { Input } from './ui/input';
 import Cards from './Cards';
 import { useEffect, useState } from 'react';
@@ -98,10 +98,19 @@ export default function Products() {
       }
     }
     // console.log(data)
+    const refreshProducts = ()=>{
+      getProducts()
+    }
+
   return (
     <>
       <div className=' w-full flex flex-wrap justify-center sm:justify-end items-center'>
-          
+      <div className='flex justify-center cursor-pointer'>
+        <Button onClick={refreshProducts}>
+          Actualizar
+          <RefreshCw/>
+        </Button>
+      </div>
           <AlertDialog>
             <AlertDialogTrigger className='flex justify-center items-center text-gray-50 bg-black m-3 w-48 h-10 rounded-md'>Crear producto <CirclePlus className='mx-2'/></AlertDialogTrigger>
             <AlertDialogContent>
@@ -141,6 +150,7 @@ export default function Products() {
           <Search className=" text-gray-500" />
         </div>
       </div>
+      
       <div className='flex flex-wrap justify-center'>
       {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
         filteredProducts.slice().reverse().map((product) => (
