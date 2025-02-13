@@ -36,12 +36,9 @@ export default function Products() {
     const [message, setMessage] = useState("")
     const getProducts = async () => {
         try {
-            fetch('/api/getProducts')
-            .then(response => response.json())
-            .then(data => {
-                // console.log(data);
-                setProducts(data)
-            })
+          const response = await fetch('/api/getProducts');
+          const data = await response.json();
+          setProducts([...data]);
         } catch (error) {
             console.log('Ocurrio un error al obtener productos', error)
         }
@@ -78,15 +75,25 @@ export default function Products() {
           body: formData
         })
         const result = await response.json()
-        console.log(result)
+        // console.log(result)
         if(result){
           setMessage(result.message)
+          // console.log("antes getProducts")
+          await getProducts()
+          // console.log("paso getProducts")
+          setData({
+            name: "",
+            image: "",
+            description: "",
+            priceList: "",
+            pricePublic: ""
+          });
         }else {
           console.error('Error al crear el producto:', result.message || result.error);
-          setMessage(error)
+          setMessage(result.error)
         }
       } catch (error) {
-        console.log(error)
+        // console.log(error)
         setMessage(error.message)
       }
     }
@@ -136,8 +143,8 @@ export default function Products() {
       </div>
       <div className='flex flex-wrap justify-center'>
       {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
-        filteredProducts.reverse().map((product) => (
-            <Cards key={product.name} product={product} />
+        filteredProducts.slice().reverse().map((product) => (
+            <Cards key={product.name} product={product} refreshProducts={getProducts} />
         ))
         ) : (
         <p>No se encontro ningun producto</p>
