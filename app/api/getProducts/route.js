@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 export async function GET(request){
-    const getProductsUrl = process.env.CLOUDINARY_GET_PRODUCTS
+    const getProductsUrl = "https://res.cloudinary.com/djkld6wmk/raw/upload/sistema%20cosmeticos/data/nbycn2va6xg87wcos3cj.json"
     try {
         // esto trae productos de directorio
         // const filePath = path.join(process.cwd(), 'data', 'products.json');
