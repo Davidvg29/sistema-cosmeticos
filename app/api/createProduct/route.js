@@ -33,9 +33,9 @@ export async function POST(request) {
         // Leer productos actuales y manejar JSON vacío
         // const filePath = path.join(process.cwd(), 'data', 'products.json');
         let products = [];
-        const jsonFileUrl = "https://res.cloudinary.com/djkld6wmk/raw/upload/v1739392429/sistema%20cosmeticos/data/nbycn2va6xg87wcos3cj.json"
+        const jsonFileUrl = "https://res.cloudinary.com/djkld6wmk/raw/upload/sistema%20cosmeticos/data/nbycn2va6xg87wcos3cj.json"
         const response = await fetch(jsonFileUrl)
-        let datafile = await response.json()
+        let datafile =  await response.json()
         products = datafile
         // try {
         //     const fileContents = await fs.readFile(filePath, 'utf-8');
@@ -82,9 +82,15 @@ export async function POST(request) {
           // 4️⃣ Subir el JSON modificado a Cloudinary
           await new Promise((resolve, reject) => {
             cloudinary.uploader.upload_stream(
-              { resource_type: "raw", public_id: "sistema cosmeticos/data/nbycn2va6xg87wcos3cj.json", overwrite: true }, 
+              { 
+                resource_type: "raw", 
+                public_id: "sistema cosmeticos/data/nbycn2va6xg87wcos3cj.json", 
+                overwrite: true, 
+                invalidate: true,
+              }, 
               (err, result) => {
                 if (err) reject(err);
+                // console.log(result)
                 resolve(result);
               }
             ).end(buffer2);
