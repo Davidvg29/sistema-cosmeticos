@@ -37,7 +37,7 @@ export function Login({className, ...props}) {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         if(data.success){
           sessionStorage.setItem("token", data.token)
           router.push('/dashboard')
