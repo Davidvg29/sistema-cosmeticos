@@ -18,6 +18,7 @@ export async function POST(request){
         const buffer2 = Buffer.from(jsonString, "utf-8");
         
         // Subir el JSON modificado a Cloudinary
+        // das
         await new Promise((resolve, reject) => {
           cloudinary.uploader.upload_stream(
             { 
