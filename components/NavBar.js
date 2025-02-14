@@ -7,9 +7,16 @@ import {
     SheetTrigger,
   } from "@/components/ui/sheet"
 import { Button } from "./ui/button"
-  
+import { useRouter } from "next/navigation";
 
 export default function NavBar(){
+    const router = useRouter()
+
+    const closeSesion = ()=>{
+        sessionStorage.removeItem("token");
+        router.push('/')
+    }
+
     return(
         <>
             <nav className="bg-gray-100 flex justify-between items-center w-full h-16">
@@ -24,7 +31,7 @@ export default function NavBar(){
                         {/* This action cannot be undone. This will permanently delete your account
                         and remove your data from our servers. */}
                     </SheetDescription>
-                    <Button>Cerrar sesion</Button>
+                    <Button onClick={closeSesion}>Cerrar sesion</Button>
                     </SheetHeader>
                 </SheetContent>
                 </Sheet>
